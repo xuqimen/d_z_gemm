@@ -190,9 +190,10 @@ void d_z_gemm_orig(const CBLAS_LAYOUT Layout, const CBLAS_TRANSPOSE transa, cons
 /**
  * @brief Double-type matrix times a complex double-typed matrix.
  *
- *        Find C = A x B, where A is real, B is complex, and thus the result C is complex.
- *        We first find real(C) = A x real(B), then find imag(C) = A x imag(C), then we set
- *        C = real(C) + imag(C) * I.
+ *        Find C = alpha * A * B + beta * C, where A is real, B is complex, and thus the
+ *        result C is complex. We first find real(C) = A * real(B), then find imag(C) = A * imag(C),
+ *        then we set
+ *        C = beta * C + alpha * real(C) + alpha * imag(C) * I.
  */
 void d_z_gemm(const CBLAS_LAYOUT Layout, const CBLAS_TRANSPOSE transa, const CBLAS_TRANSPOSE transb,
     const MKL_INT m, const MKL_INT n, const MKL_INT k, const void *alpha, const double *a, const MKL_INT lda, 
